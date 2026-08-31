@@ -1,0 +1,121 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --font-inter: 'Inter', sans-serif;
+    --font-outfit: 'Outfit', sans-serif;
+  }
+
+  body {
+    @apply bg-[#f8f9fa] text-[#1e293b] antialiased selection:bg-[#2d6a4f] selection:text-white;
+    font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+  }
+}
+
+/* Accessibility Modes */
+.font-normal-mode {
+  font-size: 16px;
+}
+.font-large-mode {
+  font-size: 18px;
+}
+.font-xlarge-mode {
+  font-size: 20px;
+}
+
+.high-contrast-mode {
+  --bg-primary: #000000;
+  --text-primary: #ffffff;
+  filter: contrast(115%) saturate(120%);
+}
+
+.high-contrast-mode body {
+  background-color: #0d1117 !important;
+  color: #f0f6fc !important;
+}
+
+.high-contrast-mode .bg-white {
+  background-color: #161b22 !important;
+  color: #f0f6fc !important;
+  border-color: #30363d !important;
+}
+
+.high-contrast-mode .text-slate-600,
+.high-contrast-mode .text-slate-500,
+.high-contrast-mode .text-slate-700 {
+  color: #c9d1d9 !important;
+}
+
+/* Custom scrollbar */
+::-webkit-scrollbar {
+  width: 7px;
+  height: 7px;
+}
+::-webkit-scrollbar-track {
+  background: #f1f5f9;
+}
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #94a3b8;
+}
+
+/* Print styling for e-Pass and DBT Receipts */
+@media print {
+  body * {
+    visibility: hidden;
+  }
+  #printable-receipt, #printable-receipt * {
+    visibility: visible;
+  }
+  #printable-receipt {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100%;
+    margin: 0;
+    padding: 20px;
+    background: white;
+    color: black;
+  }
+}
+
+/* Glassmorphism & custom utility classes */
+.glass-card {
+  background: rgba(255, 255, 255, 0.92);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+}
+
+.glass-dark {
+  background: rgba(27, 67, 50, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(45, 106, 79, 0.4);
+}
+
+.radar-sweep {
+  position: relative;
+  overflow: hidden;
+}
+.radar-sweep::after {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: conic-gradient(from 0deg at 50% 50%, rgba(45, 106, 79, 0) 0deg, rgba(45, 106, 79, 0.15) 60deg, rgba(45, 106, 79, 0) 61deg);
+  animation: radar-rotate 4s linear infinite;
+  pointer-events: none;
+}
+
+@keyframes radar-rotate {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
